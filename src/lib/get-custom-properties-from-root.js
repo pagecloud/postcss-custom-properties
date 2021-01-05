@@ -1,5 +1,5 @@
 import { parse } from "postcss-values-parser";
-import { isBlockIgnored } from "./is-ignored.mjs";
+import { isBlockIgnored } from "./is-ignored.js";
 
 // return custom selectors from the css root, conditionally removing them
 export default function getCustomPropertiesFromRoot(root, opts) {

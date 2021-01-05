@@ -1,6 +1,6 @@
 import { parse } from "postcss-values-parser";
-import transformValueAST from "./transform-value-ast.mjs";
-import { isRuleIgnored } from "./is-ignored.mjs";
+import transformValueAST from "./transform-value-ast.js";
+import { isRuleIgnored } from "./is-ignored.js";
 
 // transform custom pseudo selectors with custom selectors
 export default (root, customProperties, opts) => {

@@ -1,8 +1,8 @@
 import postcss from "postcss";
-import getCustomPropertiesFromRoot from "./lib/get-custom-properties-from-root.mjs";
-import getCustomPropertiesFromImports from "./lib/get-custom-properties-from-imports.mjs";
-import transformProperties from "./lib/transform-properties.mjs";
-import writeCustomPropertiesToExports from "./lib/write-custom-properties-to-exports.mjs";
+import getCustomPropertiesFromRoot from "./lib/get-custom-properties-from-root.js";
+import getCustomPropertiesFromImports from "./lib/get-custom-properties-from-imports.js";
+import transformProperties from "./lib/transform-properties.js";
+import writeCustomPropertiesToExports from "./lib/write-custom-properties-to-exports.js";
 
 export default postcss.plugin("postcss-custom-properties", (opts) => {
 	// whether to preserve custom selectors and rules using them
