@@ -1,18 +1,12 @@
 'use strict';
 
-var postcss = require('postcss');
-var postcssValuesParser = require('postcss-values-parser');
-var fs = require('fs');
-var path = require('path');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 function _interopNamespace(e) {
-	if (e && e.__esModule) return e;
-	var n = Object.create(null);
-	if (e) {
-		Object.keys(e).forEach(function (k) {
-			if (k !== 'default') {
+	if (e && e.__esModule) { return e; } else {
+		var n = {};
+		if (e) {
+			Object.keys(e).forEach(function (k) {
 				var d = Object.getOwnPropertyDescriptor(e, k);
 				Object.defineProperty(n, k, d.get ? d : {
 					enumerable: true,
@@ -20,16 +14,17 @@ function _interopNamespace(e) {
 						return e[k];
 					}
 				});
-			}
-		});
+			});
+		}
+		n['default'] = e;
+		return n;
 	}
-	n['default'] = e;
-	return Object.freeze(n);
 }
 
-var postcss__default = /*#__PURE__*/_interopDefaultLegacy(postcss);
-var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
-var path__default = /*#__PURE__*/_interopDefaultLegacy(path);
+var postcss = _interopDefault(require('postcss'));
+var postcssValuesParser = require('postcss-values-parser');
+var fs = _interopDefault(require('fs'));
+var path = _interopDefault(require('path'));
 
 function isBlockIgnored(ruleOrDeclaration) {
   var rule = ruleOrDeclaration.selector ? ruleOrDeclaration : ruleOrDeclaration.parent;
@@ -101,7 +96,7 @@ function extractProperties(rule, preserve) {
 
 async function getCustomPropertiesFromCSSFile(from) {
   const css = await readFile(from);
-  const root = postcss__default['default'].parse(css, {
+  const root = postcss.parse(css, {
     from
   });
   return getCustomPropertiesFromRoot(root, {
@@ -134,7 +129,7 @@ async function getCustomPropertiesFromJSONFile(from) {
 
 
 async function getCustomPropertiesFromJSFile(from) {
-  const object = await Promise.resolve().then(function () { return /*#__PURE__*/_interopNamespace(require(from)); });
+  const object = await new Promise(function (resolve) { resolve(_interopNamespace(require(from))); });
   return getCustomPropertiesFromObject(object);
 }
 /* Get Custom Properties from Imports
@@ -159,9 +154,9 @@ function getCustomPropertiesFromImports(sources) {
     } // source pathname
 
 
-    const from = path__default['default'].resolve(String(opts.from || "")); // type of file being read from
+    const from = path.resolve(String(opts.from || "")); // type of file being read from
 
-    const type = (opts.type || path__default['default'].extname(from).slice(1)).toLowerCase();
+    const type = (opts.type || path.extname(from).slice(1)).toLowerCase();
     return {
       type,
       from
@@ -191,7 +186,7 @@ function getCustomPropertiesFromImports(sources) {
 /* ========================================================================== */
 
 const readFile = from => new Promise((resolve, reject) => {
-  fs__default['default'].readFile(from, "utf8", (error, result) => {
+  fs.readFile(from, "utf8", (error, result) => {
     if (error) {
       reject(error);
     } else {
@@ -418,7 +413,7 @@ function writeCustomPropertiesToExports(customProperties, destinations) {
         // destination pathname
         const to = String(opts.to || ''); // type of file being written to
 
-        const type = (opts.type || path__default['default'].extname(opts.to).slice(1)).toLowerCase(); // transformed Custom Properties
+        const type = (opts.type || path.extname(opts.to).slice(1)).toLowerCase(); // transformed Custom Properties
 
         const customPropertiesJSON = toJSON(customProperties);
 
@@ -459,7 +454,7 @@ const defaultCustomPropertiesToJSON = customProperties => {
 };
 
 const writeFile = (to, text) => new Promise((resolve, reject) => {
-  fs__default['default'].writeFile(to, text, error => {
+  fs.writeFile(to, text, error => {
     if (error) {
       reject(error);
     } else {
@@ -470,7 +465,7 @@ const writeFile = (to, text) => new Promise((resolve, reject) => {
 
 const escapeForJS = string => string.replace(/\\([\s\S])|(')/g, '\\$1$2').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
 
-var index = postcss__default['default'].plugin("postcss-custom-properties", opts => {
+var index = postcss.plugin("postcss-custom-properties", opts => {
   // whether to preserve custom selectors and rules using them
   const preserve = "preserve" in Object(opts) ? Boolean(opts.preserve) : true; // sources to import custom selectors from
 
