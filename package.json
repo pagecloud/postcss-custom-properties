@@ -8,9 +8,14 @@
     "Jim Sproull"
   ],
   "license": "MIT",
-  "repository": "jimsproull/postcss-custom-properties",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimsproull/postcss-custom-properties.git"
+  },
   "homepage": "https://github.com/postcss/postcss-custom-properties#readme",
-  "bugs": "https://github.com/postcss/postcss-custom-properties/issues",
+  "bugs": {
+    "url": "https://github.com/postcss/postcss-custom-properties/issues"
+  },
   "main": "index.cjs.js",
   "module": "index.esm.mjs",
   "files": [
@@ -71,5 +76,8 @@
     "w3c",
     "csswg",
     "specification"
-  ]
+  ],
+  "directories": {
+    "test": "test"
+  }
 }
