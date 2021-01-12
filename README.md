@@ -1,3 +1,7 @@
+### This is a fork made by @jimsproull to get this postcss plugin to work with postcss-html.
+
+Ideally this could *potentially* get merged back into the main branch - the changes involved supporting root nodes and not just single leaves.
+
 # PostCSS Custom Properties [<img src="https://postcss.github.io/postcss/logo.svg" alt="PostCSS" width="90" height="90" align="right">][postcss]
 
 [![NPM Version][npm-img]][npm-url]
